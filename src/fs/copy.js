@@ -19,7 +19,10 @@ const copy = async () => {
     await fsPromises.mkdir("src/fs/files_copy");
     const files = await fsPromises.readdir("src/fs/files");
     for (const file of files) {
-      await fsPromises.copyFile(`src/fs/files/${file}`, `src/fs/files_copy/${file}`);
+      await fsPromises.copyFile(
+        `src/fs/files/${file}`,
+        `src/fs/files_copy/${file}`
+      );
     }
   } catch (error) {
     console.error(error);
