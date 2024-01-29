@@ -5,6 +5,7 @@ const copy = async () => {
   try {
     const sourceDir = path.join("src", "fs", "files");
     const targetDir = path.join("src", "fs", "files_copy");
+    console.log(sourceDir);
     const isExistSource = await fsPromises
       .access(sourceDir)
       .then(() => true)
@@ -23,8 +24,8 @@ const copy = async () => {
     const files = await fsPromises.readdir(sourceDir);
     for (const file of files) {
       await fsPromises.copyFile(
-        `src/fs/files/${file}`,
-        `src/fs/files_copy/${file}`
+        path.join(sourceDir, file),
+        path.join(targetDir, file)
       );
     }
   } catch (error) {
