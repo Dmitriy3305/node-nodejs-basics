@@ -1,9 +1,11 @@
 import { promises as fsPromises } from "fs";
+import path from "path";
 
 const read = async () => {
+  const targetDir = path.join("src", "fs", "files", "fileToRead.txt");
   try {
     const isExistSource = await fsPromises
-      .access("src/fs/files/fileToRead.txt")
+      .access(targetDir)
       .then(() => true)
       .catch(() => false);
 
@@ -11,10 +13,7 @@ const read = async () => {
       throw new Error("FS operation failed");
     }
 
-    const fileContent = await fsPromises.readFile(
-      "src/fs/files/fileToRead.txt",
-      "utf-8"
-    );
+    const fileContent = await fsPromises.readFile(targetDir, "utf-8");
     console.log(fileContent);
   } catch (error) {
     console.error(error);

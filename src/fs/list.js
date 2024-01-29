@@ -1,9 +1,11 @@
 import { promises as fsPromises } from "fs";
+import path from "path";
 
 const list = async () => {
+  const targetDir = path.join("src", "fs", "files");
   try {
     const isExistSource = await fsPromises
-      .access("src/fs/files")
+      .access(targetDir)
       .then(() => true)
       .catch(() => false);
 
@@ -11,10 +13,8 @@ const list = async () => {
       throw new Error("FS operation failed");
     }
 
-    const files = await fsPromises.readdir("src/fs/files");
-    for (const file of files) {
-      console.log(file);
-    }
+    const files = await fsPromises.readdir(targetDir);
+    console.log(files);
   } catch (error) {
     console.error(error);
   }

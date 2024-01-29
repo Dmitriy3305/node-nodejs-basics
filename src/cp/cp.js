@@ -1,7 +1,10 @@
+import path from "path";
+
 const spawnChildProcess = async (args) => {
   const { spawn } = await import("child_process");
+  const targetDir = path.join("src", "cp", "files", "script.js");
 
-  const childProcess = spawn("node", ["src/cp/files/script.js", ...args], {
+  const childProcess = spawn("node", [targetDir, ...args], {
     stdio: ["inherit", "inherit", "inherit", "ipc"],
   });
 

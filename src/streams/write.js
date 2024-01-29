@@ -1,7 +1,9 @@
 import fs from "fs";
+import path from "path";
 
 const write = async () => {
-  const writeStream = fs.createWriteStream("src/streams/files/fileToWrite.txt");
+  const targetDir = path.join("src", "streams", "files", "fileToWrite.txt");
+  const writeStream = fs.createWriteStream(targetDir);
 
   const finished = new Promise((res, rej) => {
     writeStream.on("finish", res);

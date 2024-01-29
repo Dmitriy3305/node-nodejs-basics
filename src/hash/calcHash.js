@@ -1,11 +1,16 @@
 import { createReadStream } from "fs";
 import { createHash } from "crypto";
+import path from "path";
 
 const calculateHash = async () => {
   return new Promise((resolve, reject) => {
-    const stream = createReadStream(
-      "src/hash/files/fileToCalculateHashFor.txt"
+    const targetDir = path.join(
+      "src",
+      "hash",
+      "files",
+      "fileToCalculateHashFor.txt"
     );
+    const stream = createReadStream(targetDir);
     const hash = createHash("sha256");
 
     stream.on("data", (chunk) => {

@@ -1,14 +1,17 @@
 import { promises as fsPromises } from "fs";
+import path from "path";
 
 const copy = async () => {
   try {
+    const sourceDir = path.join("src", "fs", "files");
+    const targetDir = path.join("src", "fs", "files_copy");
     const isExistSource = await fsPromises
-      .access("src/fs/files")
+      .access(sourceDir)
       .then(() => true)
       .catch(() => false);
 
     const isExistTarget = await fsPromises
-      .access("src/fs/files_copy")
+      .access(targetDir)
       .then(() => true)
       .catch(() => false);
 
@@ -16,8 +19,8 @@ const copy = async () => {
       throw new Error("FS operation failed");
     }
 
-    await fsPromises.mkdir("src/fs/files_copy");
-    const files = await fsPromises.readdir("src/fs/files");
+    await fsPromises.mkdir(targetDir);
+    const files = await fsPromises.readdir(sourceDir);
     for (const file of files) {
       await fsPromises.copyFile(
         `src/fs/files/${file}`,
